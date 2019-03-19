@@ -6,10 +6,10 @@ class Subscription {
 
     var $apiKey = "";
     var $apiSecret = "";
-    var $apiUrl = "http://localhost:1337/v1/";
-    var $thankyouUrl = "http://localhost:5000/thankyou/";
+    var $apiUrl = "https://payments.pabbly.com/api/v1/";
+    var $thankyouUrl = "https://payments.pabbly.com/thankyou/";
 
-    function __construct($apiKey = "beffff9f0ffe14a07668", $apiSecret = "7fd216c23e0fa381577f7d00652526a6") {
+    function __construct($apiKey = "", $apiSecret = "") {
         if (!$apiKey && !$apiSecret) {
             throw new Exception('Error: apikey and api secret are required');
         }
