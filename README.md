@@ -47,10 +47,12 @@ try {
 } catch (Exception $e) {
     die($e->getMessage());
 }
+$user = $api_data->user;
 $customer = $api_data->customer;
 $product = $api_data->product;
 $plan = $api_data->plan;
 $invoice = $api_data->invoice;
+$currency = $user->currency;
 
 //Do your payment processor task here
 
@@ -63,7 +65,7 @@ $transaction_data = "Which returns by your custom gateway for your record"; //st
 $api_data  =  $subscription->recordPayment($invoice_id, $payment_mode, $payment_note, $transaction_data);
 
 //Redirct to thank you page
-$subscription->redirectThanktyou($api_data->subscription->id, $api_data->subscription->customer_id);
+$subscription->redirectThankYou($api_data->subscription->id, $api_data->subscription->customer_id);
 } catch (Exception  $e) {
 die($e->getMessage());
 }
@@ -99,10 +101,12 @@ $api_data = array(
 //Subscribe the plan
 $apiResponse = $subscription->subscribe($api_data);
 
-$customer = $apiResponse->customer;
-$product = $apiResponse->product;
-$plan = $apiResponse->plan;
-$invoice = $apiResponse->invoice;
+$user = $api_data->user;
+$customer = $api_data->customer;
+$product = $api_data->product;
+$plan = $api_data->plan;
+$invoice = $api_data->invoice;
+$currency = $user->currency;
 
 //Do your payment processor task here
 

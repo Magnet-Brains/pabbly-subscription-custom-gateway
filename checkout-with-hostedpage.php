@@ -17,10 +17,12 @@ try {
 } catch (Exception $e) {
     die($e->getMessage());
 }
+$user = $api_data->user;
 $customer = $api_data->customer;
 $product = $api_data->product;
 $plan = $api_data->plan;
 $invoice = $api_data->invoice;
+$currency = $user->currency;
 
 //Do your payment processor task here
 
@@ -30,10 +32,11 @@ try {
 $invoice_id = $invoice->id;
 $payment_mode = "Your custom gateway name";
 $transaction_data = "Which returns by your custom gateway for your record"; //string/object
+$payment_note = ""; //Note for your payment transaction if any
 $api_data  =  $subscription->recordPayment($invoice_id, $payment_mode, $payment_note, $transaction_data);
 
 //Redirct to thank you page
-$subscription->redirectThanktyou($api_data->subscription->id, $api_data->subscription->customer_id);
+$subscription->redirectThankYou($api_data->subscription->id, $api_data->subscription->customer_id);
 } catch (Exception  $e) {
 die($e->getMessage());
 }
