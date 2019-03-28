@@ -23,10 +23,12 @@ $api_data = array(
 //Subscribe the plan
 $apiResponse = $subscription->subscribe($api_data);
 
+$user = $apiResponse->user;
 $customer = $apiResponse->customer;
 $product = $apiResponse->product;
 $plan = $apiResponse->plan;
 $invoice = $apiResponse->invoice;
+$currency = $user->currency;
 
 //Do your payment processor task here
 //After complete the payment process you have to record the payment for the invoice due. Use the following example for that:
@@ -37,9 +39,9 @@ try {
     $transaction_data = "Which returns by your custom gateway for your record"; //string/object
     $api_data = $subscription->recordPayment($invoice_id, $payment_mode, $payment_note, $transaction_data);
 
-//Redirct to thank you page, you can also redirect or show your custom thank you page
-    $subscription->redirectThanktyou($api_data->subscription->id, $api_data->subscription->customer_id);
+    //Redirct to thank you page, you can also redirect or show your custom thank you page
+    $subscription->redirectThankYou($api_data->subscription->id, $api_data->subscription->customer_id);
 } catch (Exception $e) {
     die($e->getMessage());
 }
-?>
+ 
