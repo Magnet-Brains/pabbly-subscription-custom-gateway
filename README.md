@@ -119,7 +119,7 @@ $transaction_data = "Which returns by your custom gateway for your record"; //st
 $api_data  =  $subscription->recordPayment($invoice_id, $payment_mode, $payment_note, $transaction_data);
 
 //Redirct to thank you page, you can also redirect or show your custom thank you page
-$subscription->redirectThanktyou($api_data->subscription->id, $api_data->subscription->customer_id);
+$subscription->redirectThankYou($api_data->subscription->id, $api_data->subscription->customer_id);
 } catch (Exception  $e) {
 die($e->getMessage());
 }
