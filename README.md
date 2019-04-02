@@ -101,11 +101,11 @@ $api_data = array(
 //Subscribe the plan
 $apiResponse = $subscription->subscribe($api_data);
 
-$user = $api_data->user;
-$customer = $api_data->customer;
-$product = $api_data->product;
-$plan = $api_data->plan;
-$invoice = $api_data->invoice;
+$user = $apiResponse->user;
+$customer = $apiResponse->customer;
+$product = $apiResponse->product;
+$plan = $apiResponse->plan;
+$invoice = $apiResponse->invoice;
 $currency = $user->currency;
 
 //Do your payment processor task here
