@@ -47,6 +47,19 @@ try {
 } catch (Exception $e) {
     die($e->getMessage());
 }
+
+$_subscription = $api_data->subscription;
+//If the subscription is trial, activate it and redirect to thank you page
+if ($_subscription->trial_days > 0) {
+    //Do here your additional things if require.
+
+    //Activate the trial subscription
+    $api_data = $subscription->activateTrialSubscription($_subscription->id);
+
+    //Redirect to the thank you page
+    $subscription->redirectThanktyou($api_data->subscription->id, $api_data->subscription->customer_id);
+}
+
 $user = $api_data->user;
 $customer = $api_data->customer;
 $product = $api_data->product;
@@ -100,6 +113,18 @@ $api_data = array(
 
 //Subscribe the plan
 $apiResponse = $subscription->subscribe($api_data);
+
+$_subscription = $apiResponse->subscription;
+//If the subscription is trial, activate it and redirect to thank you page
+if ($_subscription->trial_days > 0) {
+    //Do here your additional things if require.
+
+    //Activate the trial subscription
+    $api_data = $subscription->activateTrialSubscription($_subscription->id);
+
+    //Redirect to the thank you page
+    $subscription->redirectThanktyou($api_data->subscription->id, $api_data->subscription->customer_id);
+}
 
 $user = $apiResponse->user;
 $customer = $apiResponse->customer;

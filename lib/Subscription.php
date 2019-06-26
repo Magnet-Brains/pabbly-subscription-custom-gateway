@@ -2,14 +2,16 @@
 
 use \Curl\Curl;
 
-class Subscription {
+class Subscription
+{
 
     var $apiKey = "";
     var $apiSecret = "";
     var $apiUrl = "https://payments.pabbly.com/api/v1/";
     var $thankyouUrl = "https://payments.pabbly.com/thankyou/";
 
-    function __construct($apiKey = "", $apiSecret = "") {
+    function __construct($apiKey = "", $apiSecret = "")
+    {
         if (!$apiKey && !$apiSecret) {
             throw new Exception('Error: apikey and api secret are required');
         }
@@ -17,7 +19,8 @@ class Subscription {
         $this->apiSecret = $apiSecret;
     }
 
-    function apiPath($path) {
+    function apiPath($path)
+    {
         return $this->apiUrl . $path;
     }
 
@@ -27,7 +30,8 @@ class Subscription {
      * @return type
      * @throws Exception
      */
-    function subscribe($data) {
+    function subscribe($data)
+    {
         $curl = new Curl();
         $curl->setBasicAuthentication($this->apiKey, $this->apiSecret);
         $curl->post($this->apiPath('subscription'), array(
@@ -60,8 +64,9 @@ class Subscription {
      * @return type
      * @throws Exception
      */
-    function recordPayment($invoice_id, $payment_mode, $payment_note, $transaction_data) {
-        if(!$invoice_id){
+    function recordPayment($invoice_id, $payment_mode, $payment_note, $transaction_data)
+    {
+        if (!$invoice_id) {
             throw new Exception('Error: invoice id is required');
         }
         $curl = new Curl();
@@ -85,7 +90,8 @@ class Subscription {
      * @param type $subscriptionId
      * @param type $customerId
      */
-    function redirectThankYou($subscriptionId, $customerId) {
+    function redirectThankYou($subscriptionId, $customerId)
+    {
         $redirect_url = $this->thankyouUrl . $subscriptionId . "/" . $customerId;
         header('Location:' . $redirect_url);
         exit;
@@ -97,7 +103,8 @@ class Subscription {
      * @return type
      * @throws Exception        
      */
-    function hostedPage($hostedpage) {
+    function hostedPage($hostedpage)
+    {
         $curl = new Curl();
         $curl->setBasicAuthentication($this->apiKey, $this->apiSecret);
         $curl->post($this->apiPath('hostedpage'), array(
@@ -112,4 +119,23 @@ class Subscription {
         return $curl->response->data;
     }
 
+    /**
+     * Activate the trial subscription
+     */
+    function activateTrialSubscription($subscription_id)
+    {
+        if (!$subscription_id) {
+            throw new Exception('Error: invoice id is required');
+        }
+        $curl = new Curl();
+        $curl->setBasicAuthentication($this->apiKey, $this->apiSecret);
+        $curl->post($this->apiPath('subscription/activatetrial/' . $subscription_id), []);
+        if ($curl->error) {
+            throw new Exception('Error: ' . $curl->errorCode . ': ' . $curl->errorMessage);
+        }
+        if ($curl->response->status == 'error') {
+            throw new Exception('Error: ' . $curl->response->message);
+        }
+        return $curl->response->data;
+    }
 }
