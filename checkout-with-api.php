@@ -27,12 +27,11 @@ $_subscription = $apiResponse->subscription;
 //If the subscription is trial, activate it and redirect to thank you page
 if ($_subscription->trial_days > 0) {
     //Do here your additional things if require.
-
     //Activate the trial subscription
     $api_data = $subscription->activateTrialSubscription($_subscription->id);
 
     //Redirect to the thank you page
-    $subscription->redirectThanktyou($api_data->subscription->id, $api_data->subscription->customer_id);
+    $subscription->redirectThankYou($api_data->subscription->id, $api_data->subscription->customer_id, $api_data->product->redirect_url);
 }
 
 $user = $apiResponse->user;
@@ -52,7 +51,7 @@ try {
     $api_data = $subscription->recordPayment($invoice_id, $payment_mode, $payment_note, $transaction_data);
 
     //Redirct to thank you page, you can also redirect or show your custom thank you page
-    $subscription->redirectThankYou($api_data->subscription->id, $api_data->subscription->customer_id);
+    $subscription->redirectThankYou($api_data->subscription->id, $api_data->subscription->customer_id, $api_data->product->redirect_url);
 } catch (Exception $e) {
     die($e->getMessage());
 }
