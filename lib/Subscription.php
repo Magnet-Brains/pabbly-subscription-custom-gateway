@@ -142,4 +142,22 @@ class Subscription {
         return $curl->response->data;
     }
 
+    /**
+     * Get customer detail
+     */
+    function getCustomer($customerId)
+    {
+        $curl = new Curl();
+        $curl->setBasicAuthentication($this->apiKey, $this->apiSecret);
+        $curl->get($this->apiPath('customer/' . $customerId), array());
+        if ($curl->error) {
+            throw new Exception('Error: ' . $curl->errorCode . ': ' . $curl->errorMessage);
+        }
+        if ($curl->response->status == 'error') {
+            throw new Exception('Error: ' . $curl->response->message);
+        }
+        return $curl->response->data;
+    }
+	
+
 }
