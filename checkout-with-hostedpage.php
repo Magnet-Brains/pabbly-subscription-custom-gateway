@@ -7,8 +7,8 @@ if (!isset($_GET['hostedpage'])) {
     throw new Exception('Hosted page data is required');
 }
 //Api credential of Pabbly Subscription
-$apiKey = "2a38124e1ca81da6e6a4"; //Put your api key here
-$apiSecret = "4a70d095ec5ff59d0b5659216559d0e2"; // Put your api secret here
+$apiKey = ""; //Put your api key here
+$apiSecret = ""; // Put your api secret here
 
 $hostedpage = $_GET['hostedpage'];
 $subscription = new Subscription($apiKey, $apiSecret);
@@ -46,7 +46,7 @@ try {
     $invoice_id = $invoice->id;
     $payment_mode = "Your custom gateway name";
     $transaction_data = "Which returns by your custom gateway for your record"; //string/object
-    $payment_note = ""; //Note for your payment transaction if any
+    $payment_note = "Custom gateway"; //Note for your payment transaction if any
     $api_data = $subscription->recordPayment($invoice_id, $payment_mode, $payment_note, $transaction_data);
 
 //Redirct to thank you page
@@ -54,4 +54,3 @@ try {
 } catch (Exception $e) {
     die($e->getMessage());
 }
-?>

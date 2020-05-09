@@ -15,6 +15,10 @@ class Subscription {
         }
         $this->apiKey = $apiKey;
         $this->apiSecret = $apiSecret;
+        if ($_SERVER['HTTP_HOST'] == 'localhost') {
+            $this->apiUrl = "http://localhost:1337/v1/";
+            $this->thankyouUrl = "http://localhost:5000/thankyou/";
+        }
     }
 
     function apiPath($path) {

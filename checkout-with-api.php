@@ -1,4 +1,6 @@
 <?php
+require('vendor/autoload.php');
+require __DIR__ . '/lib/Subscription.php';
 
 //Subscription plan id
 $plan_id = "Put your Pabbly Subscription plan id here";
