@@ -21,8 +21,9 @@ Pabbly Subscription custom gateway integration for PHP.
 *	Add custom gateway in Pabbly Subscription payment integration.
 *	Add your custom gateway host url in **Gateway Url** field.
 * While submitting the checkout page, process will be redirected to your gateway url with hosted page details.
-*  Then you need to call [verify hosted page api](https://www.pabbly.com/subscriptions/api/#section26)
+* Then you need to call [hostedpage](https://apidocs.pabbly.com/#94797e1a-5325-44eb-bdfb-597332a7a8c1)
 * The api will return customer, product, plan and invoice details. You can use these details to process your custom gateway.
+* Once the processing via custom payment gateway is complete, You can use the Invoice endpoints in the API to record a [successful payment](https://apidocs.pabbly.com/#115d662a-41b2-447a-a984-604bb5675e1c) or a [failed payment](https://apidocs.pabbly.com/#39077735-919c-48b0-aa66-ffb6663644d2)
 * You can also use following examples to perform this task:
 
 ### See the example below:
