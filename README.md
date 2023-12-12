@@ -13,7 +13,7 @@ Pabbly Subscription custom gateway integration for PHP.
 ## Contents:
 
 1. 	Integration through checkout page.
-2. 	Integration through Pabbly Subscription [api](https://www.pabbly.com/subscriptions/api/#section2)
+2. 	Integration through Pabbly Subscription [api](https://apidocs.pabbly.com/#7d728c89-043b-4ab2-bea9-155a6b32c836)
 
 ## Steps for Integration:
 
@@ -86,7 +86,7 @@ die($e->getMessage());
 ?>
 ```
 
-### 2. 	Integration through Pabbly Subscription [api](https://www.pabbly.com/subscriptions/api/#section2)
+### 2. 	Integration through Pabbly Subscription [api](https://apidocs.pabbly.com/#7d728c89-043b-4ab2-bea9-155a6b32c836)
 
 * Subscribe the plan through api.
 * Use the following example to use by api:
